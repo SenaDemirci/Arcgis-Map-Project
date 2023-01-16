@@ -22,7 +22,6 @@ class PointDrawer(private var context: Context, private var mapView: MapView) :I
 
     override val onTouchListener = object : DefaultMapViewOnTouchListener(this.context,mapView){
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
-            Log.d("point", "point deneme")
             if (e != null) {
                 val x = e.x.toInt()
                 val y = e.y.toInt()

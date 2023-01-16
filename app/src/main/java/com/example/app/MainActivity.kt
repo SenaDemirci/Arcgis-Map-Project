@@ -19,17 +19,25 @@ package com.example.app
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
+import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.esri.arcgisruntime.ArcGISRuntimeEnvironment
 import com.esri.arcgisruntime.data.FeatureTable
+import com.esri.arcgisruntime.data.Feature
 import com.esri.arcgisruntime.data.Geodatabase
+import com.esri.arcgisruntime.data.QueryParameters
+import com.esri.arcgisruntime.data.ServiceFeatureTable
+import com.esri.arcgisruntime.geometry.GeometryEngine
 import com.esri.arcgisruntime.layers.FeatureLayer
 import com.esri.arcgisruntime.loadable.LoadStatus
 import com.esri.arcgisruntime.mapping.ArcGISMap
 import com.esri.arcgisruntime.mapping.BasemapStyle
 import com.esri.arcgisruntime.mapping.Viewpoint
 import com.esri.arcgisruntime.mapping.view.MapView
+import com.example.app.Commands.Tools.CheckArea
 import com.example.app.Commands.Tools.LineDrawer
 import com.example.app.Commands.Tools.PointDrawer
 import com.example.app.Commands.Tools.PolygonDrawer
@@ -37,31 +45,26 @@ import com.example.app.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var pointDrawer: PointDrawer
-    private lateinit var lineDrawer: LineDrawer
-    private lateinit var polygonDrawer: PolygonDrawer
-
     private lateinit var toolManager: ToolManager
-    private val geodatabasePath = "/sdcard/DATA/data1.geodatabase"
+    private lateinit var checkArea: CheckArea
+    private val geodatabasePath = "/storage/emulated/0/DATA/Demo.geodatabase"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(activityMainBinding.root)
 
         val linearLayout = LinearLayout(this)
-
-        pointDrawer = PointDrawer(this@MainActivity, mapView)
-        lineDrawer = LineDrawer(this@MainActivity, mapView)
-        polygonDrawer = PolygonDrawer(this@MainActivity, mapView)
-
+        linearLayout.orientation = LinearLayout.HORIZONTAL
         activityMainBinding.layout.addView(linearLayout)
-        toolManager  = ToolManager(this@MainActivity, listOf(pointDrawer,lineDrawer,polygonDrawer),linearLayout)
+
+        toolManager  = ToolManager(this@MainActivity, mapView, linearLayout)
 
         toolManager.Initialize()
 
         setApiKeyForApp()
 
         setupMap()
+
     }
 
 
@@ -82,7 +85,7 @@ class MainActivity : AppCompatActivity() {
         // set the map to be displayed in the layout's MapView
         mapView.map = map
         // set the viewpoint, Viewpoint(latitude, longitude, scale)
-        mapView.setViewpoint(Viewpoint(34.0270, -118.8050, 72000.0))
+        mapView.setViewpoint(Viewpoint(39.142, 34.502, 72000.0))
     }
 
     private fun setApiKeyForApp(){
@@ -92,20 +95,22 @@ class MainActivity : AppCompatActivity() {
 
         ArcGISRuntimeEnvironment.setApiKey("AAPK81534aabc5ae4f7d9f09428664a6755a-Nx3w3r_hxOkhKWmdW8S9dyyDIKRRMWV18c0eiOn2q-XLkGDWdwfY_M694JkOmlk")
 
+        //val serviceFeatureTable = ServiceFeatureTable("/storage/emulated/0/DATA/Demo.geodatabase")
 
-// instantiate geodatabase with the path to the .geodatabase file
+        // instantiate geodatabase with the path to the .geodatabase file
         val geodatabase = Geodatabase(geodatabasePath)
 
         geodatabase.loadAsync()
         geodatabase.addDoneLoadingListener {
-            Log.i("HEREEE",geodatabase.loadError.toString())
             if (geodatabase.loadStatus == LoadStatus.LOADED) {
-                val featureTable: FeatureTable =
-                    geodatabase.getGeodatabaseFeatureTable("Trailheads")
-                val featureLayer = FeatureLayer(featureTable)
-                mapView.map.operationalLayers.add(featureLayer)
+                for (featureTable in geodatabase.geodatabaseFeatureTables) {
+                    //featureTable.queryFeaturesAsync()
+                    val featureLayer = FeatureLayer(featureTable)
+                    mapView.map.operationalLayers.add(featureLayer)
+                }
             }
         }
+        //checkArea  = CheckArea(this@MainActivity, mapView)
     }
 
     override fun onPause() {

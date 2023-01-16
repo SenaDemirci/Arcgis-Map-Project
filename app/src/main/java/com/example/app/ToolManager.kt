@@ -1,17 +1,31 @@
 package com.example.app
 
-import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.widget.LinearLayout
-import com.example.app.Commands.Tools.ITool
 import android.widget.Button
+import com.esri.arcgisruntime.mapping.view.MapView
 import com.example.app.Commands.ICommand
+import com.example.app.Commands.Tools.*
 
-class ToolManager(private val context: Context, private var list: List<ICommand>, private val layout: LinearLayout){
-    private var commandList = list
+class ToolManager(private val context: Context, private val mapView: MapView, private val linearLayout: LinearLayout){
+    //private var commandList = list
     var activeTool : ITool? = null
 
-    @SuppressLint("ResourceType")
+    private var pointDrawer: PointDrawer
+    private var lineDrawer: LineDrawer
+    private var polygonDrawer: PolygonDrawer
+    private var checkArea: CheckArea
+
+    init {
+        pointDrawer = PointDrawer(context, mapView)
+        lineDrawer = LineDrawer(context, mapView)
+        polygonDrawer = PolygonDrawer(context, mapView)
+        checkArea = CheckArea(context, mapView)
+    }
+
+    val commandList = mutableListOf(pointDrawer,lineDrawer,polygonDrawer,checkArea)
+
     fun Initialize(){
         activeTool = null
         for ((id, command) in commandList.withIndex()) {
@@ -25,7 +39,7 @@ class ToolManager(private val context: Context, private var list: List<ICommand>
             button.setOnClickListener {
                 onClickListener(command)
             }
-            layout.addView(button)
+            linearLayout.addView(button)
         }
     }
 
