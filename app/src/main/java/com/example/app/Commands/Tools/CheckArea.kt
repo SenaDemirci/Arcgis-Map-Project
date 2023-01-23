@@ -20,6 +20,8 @@ class CheckArea (private var context: Context, private var mapView: MapView) :IT
     override val id = "Check Area"
     val tolerance = 5.0 // tolerance in meters
     val layerNames = mutableListOf<String>()
+    val featureLayers = mutableListOf<FeatureLayer>()
+
 
     init {
         mapView.graphicsOverlays.add(graphicsOverlay)
@@ -51,7 +53,6 @@ class CheckArea (private var context: Context, private var mapView: MapView) :IT
 
                 for (layer in mapView.map.operationalLayers) {
                     if (!layerNames.contains(layer.name)) {
-                        Log.e("yesssssss", layer.name)
                         featureLayer = layer as FeatureLayer
                     }
                 }
@@ -82,9 +83,8 @@ class CheckArea (private var context: Context, private var mapView: MapView) :IT
         result.addDoneListener {
             result.get().iterator().forEach {
                 var table = (it.featureTable as GeodatabaseFeatureTable).tableName
-                Log.e("ddddddddd1111", "doQuery: " + table)
                 if (layerNames.contains(table)) {
-                    Log.e("dddddddddddddddd", "doQuery: " + table)
+                    featureLayers.add(featureLayer)
                 }
             /*
                 if (table=="Hat") {
