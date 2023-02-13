@@ -1,10 +1,14 @@
 package com.example.app.Commands.Tools
 
 import android.content.Context
+import android.graphics.Point as androidPoint
 import android.util.Log
 import android.view.MotionEvent
+import android.widget.Button
+import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.Toast
+import com.esri.arcgisruntime.geometry.Point
 import com.esri.arcgisruntime.mapping.view.DefaultMapViewOnTouchListener
 import com.esri.arcgisruntime.mapping.view.GraphicsOverlay
 import com.esri.arcgisruntime.mapping.view.MapView
@@ -21,18 +25,29 @@ class AddItemSQL(private var context: Context, private var mapView: MapView): IT
 
     override val onTouchListener = object : DefaultMapViewOnTouchListener(context, mapView) {
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
-            showDialog();
+            if (e != null) {
+                val x = e.x.toInt()
+                val y = e.y.toInt()
+                val newPoint = mapView.screenToLocation(androidPoint(x,y))
+                showDialog(newPoint)
+            }
             return true
         }
     }
 
-    private fun showDialog() {
-        Log.e("girdiiiiiiii", "girdi")
+    private fun showDialog(newPoint: Point) {
         val dialog = BottomSheetDialog(context)
         dialog.setContentView(R.layout.bottomsheetlayout)
         val btnEdit= dialog.findViewById<RelativeLayout>(R.id.rl_edit)
         val btnDelete= dialog.findViewById<RelativeLayout>(R.id.rl_delete)
         val btnAdd= dialog.findViewById<RelativeLayout>(R.id.rl_add)
+
+        val btnSave = dialog.findViewById<Button>(R.id.save)
+        val editCode = dialog.findViewById<EditText>(R.id.code)
+        val editName = dialog.findViewById<EditText>(R.id.name)
+        Log.e("girdi", btnSave.toString())
+        Log.e("girdii", editCode.toString())
+        Log.e("girdiii", editName.toString())
 
         btnEdit?.setOnClickListener {
             Toast.makeText(context, "Clicked on Edit", Toast.LENGTH_SHORT).show()
@@ -43,6 +58,14 @@ class AddItemSQL(private var context: Context, private var mapView: MapView): IT
         btnAdd?.setOnClickListener {
             Toast.makeText(context, "Clicked on Add", Toast.LENGTH_SHORT).show()
         }
+
+        btnSave?.setOnClickListener {
+            val codeInfo = editCode?.text
+            val nameInfo = editCode?.text
+            Toast.makeText(context, codeInfo, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, nameInfo, Toast.LENGTH_SHORT).show()
+        }
+
         dialog.show()
     }
 
