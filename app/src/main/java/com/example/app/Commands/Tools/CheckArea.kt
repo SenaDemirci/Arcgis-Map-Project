@@ -29,7 +29,6 @@ class CheckArea (private var context: Context, private var mapView: MapView) :IT
 
     override val onTouchListener = object : DefaultMapViewOnTouchListener(context, mapView) {
         override fun onSingleTapUp(e: MotionEvent?): Boolean {
-            Log.i("aaaaaaaa", mapView.map.toJson())
             if (e != null) {
                 if (e.action == MotionEvent.ACTION_UP) {
                     Log.i("bbbbbbbb", mapView.id.toString())
