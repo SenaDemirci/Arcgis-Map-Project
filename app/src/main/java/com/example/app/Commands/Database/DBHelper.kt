@@ -11,10 +11,19 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?): SQLite
     override fun onCreate(db: SQLiteDatabase) {
         // below is a sqlite query, where column names
         // along with their data types is given
+
         val query = ("CREATE TABLE " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY, " +
                 NAME_COl + " TEXT," +
                 AGE_COL + " TEXT" + ")")
+
+        /*
+        val query = ("CREATE TABLE " + TABLE_NAME + " ("
+                + ID_COL + " INTEGER PRIMARY KEY, "
+                + EMP_PHOTO + " blob not null, " +
+                NAME_COl + " TEXT," +
+                AGE_COL + " TEXT" + ")")
+         */
 
         // we are calling sqlite method for executing our query
         db.execSQL(query)
@@ -35,14 +44,13 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?): SQLite
         // we are inserting our values in the form of key-value pair
         values.put(NAME_COl, name)
         values.put(AGE_COL, age)
+        //values.put(EMP_PHOTO, photo)
 
         // here we are creating a writable variable of our database as we want to insert value in our database
         val db = this.writableDatabase
 
         // all values are inserted into database
         db.insert(TABLE_NAME, null, values)
-
-        // at last we are closing our database
         db.close()
     }
 
@@ -75,5 +83,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?): SQLite
 
         // below is the variable for age column
         val AGE_COL = "age"
+
+        //val EMP_PHOTO = "photo"
     }
 }

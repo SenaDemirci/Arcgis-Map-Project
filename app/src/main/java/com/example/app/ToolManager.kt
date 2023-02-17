@@ -1,7 +1,7 @@
 package com.example.app
 
+import android.app.Activity
 import android.content.Context
-import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Button
 import com.esri.arcgisruntime.mapping.view.MapView
@@ -23,7 +23,7 @@ class ToolManager(private val context: Context, private val mapView: MapView, pr
         lineDrawer = LineDrawer(context, mapView)
         polygonDrawer = PolygonDrawer(context, mapView)
         //checkArea = CheckArea(context, mapView)
-        addItemSQL = AddItemSQL(context, mapView)
+        addItemSQL = AddItemSQL(context, mapView, activity = Activity())
     }
 
     val commandList = mutableListOf(pointDrawer,lineDrawer,polygonDrawer,addItemSQL)

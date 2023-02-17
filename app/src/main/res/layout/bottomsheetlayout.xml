@@ -91,9 +91,22 @@
             android:layout_below="@+id/save"
             android:layout_gravity="center_horizontal"
             android:text="SHOW"/>
+
+        <Button
+            android:id="@+id/camera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/print"
+            android:layout_gravity="center_horizontal"
+            android:text="CAMERA"/>
+
+        <ImageView
+            android:id="@+id/show_picture"
+            android:layout_width="153dp"
+            android:layout_height="126dp"
+            android:layout_below="@+id/camera"
+            android:layout_marginEnd="-250dp" />
     </RelativeLayout>
-
-
 
 
 </LinearLayout>
