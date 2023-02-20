@@ -18,19 +18,16 @@ package com.example.app
 
 import android.app.Activity
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.FileProvider
 import com.esri.arcgisruntime.ArcGISRuntimeEnvironment
 import com.esri.arcgisruntime.data.Geodatabase
 import com.esri.arcgisruntime.layers.FeatureLayer
@@ -40,8 +37,8 @@ import com.esri.arcgisruntime.mapping.BasemapStyle
 import com.esri.arcgisruntime.mapping.Viewpoint
 import com.esri.arcgisruntime.mapping.view.MapView
 import com.example.app.Commands.Database.DBHelper
+import com.example.app.Commands.Tools.AddItemSQL
 import com.example.app.databinding.ActivityMainBinding
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.io.File
 
 private const val FILE_NAME = "photo.jpg"
@@ -49,8 +46,6 @@ private const val REQUEST_CODE = 42
 private lateinit var photoFile: File
 
 class MainActivity : AppCompatActivity() {
-    //private lateinit var imageView: ImageView
-
 
     private lateinit var toolManager: ToolManager
     private val geodatabasePath = "/storage/emulated/0/DATA/Demo.geodatabase"
@@ -74,57 +69,28 @@ class MainActivity : AppCompatActivity() {
         val btnCamera = findViewById<Button>(R.id.btnTakePicture)
         val imageView = findViewById<ImageView>(R.id.imageView)
 
+        //var addItemSQL: AddItemSQL
+        val dbHelper = DBHelper(this@MainActivity, factory = null)
+
          val takePicture = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-
                 val takenImage = result.data?.extras?.get("data") as Bitmap
                 imageView.setImageBitmap(takenImage)
-
+                dbHelper.savePhotoToDatabase(takenImage, this@MainActivity)
             }
         }
 
-
         btnCamera?.setOnClickListener {
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            Log.e("butonnnn", takePictureIntent.data.toString())
             if (takePictureIntent.resolveActivity(this.packageManager) != null) {
-                Log.e("evetttt", takePictureIntent.resolveActivity(this.packageManager).packageName)
                 takePicture.launch(takePictureIntent)
             } else {
-                Log.e("hayirrrr", "hayirrrrr")
                 Toast.makeText(this, "Unable to open camera", Toast.LENGTH_SHORT).show()
             }
         }
 
-
- /*
-        val btnCamera = findViewById<Button>(R.id.btnTakePicture)
-        btnCamera?.setOnClickListener {
-            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            if (takePictureIntent.resolveActivity(this.packageManager) != null) {
-                Log.e("olduu", takePictureIntent.data.toString())
-                startActivityForResult(takePictureIntent, REQUEST_CODE)
-            } else {
-                Log.e("yok", takePictureIntent.data.toString())
-                Toast.makeText(this, "Unable to open camera", Toast.LENGTH_SHORT).show()
-            }
-        }
-*/
     }
 
-/*
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-    Log.e("sonnnnnnn", requestCode.toString())
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            Log.e("basarili", REQUEST_CODE.toString())
-            val takenImage = data?.extras?.get("data") as Bitmap
-            imageView.setImageBitmap(takenImage)
-        } else {
-            Log.e("basarisiz", REQUEST_CODE.toString())
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
- */
 
     private val activityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)

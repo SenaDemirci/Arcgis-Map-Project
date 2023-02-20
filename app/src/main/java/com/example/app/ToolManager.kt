@@ -23,7 +23,7 @@ class ToolManager(private val context: Context, private val mapView: MapView, pr
         lineDrawer = LineDrawer(context, mapView)
         polygonDrawer = PolygonDrawer(context, mapView)
         //checkArea = CheckArea(context, mapView)
-        addItemSQL = AddItemSQL(context, mapView, activity = Activity())
+        addItemSQL = AddItemSQL(context, mapView)
     }
 
     val commandList = mutableListOf(pointDrawer,lineDrawer,polygonDrawer,addItemSQL)
