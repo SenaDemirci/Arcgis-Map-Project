@@ -1,0 +1,9 @@
+<resources>
+
+    <string name="app_name">Add Point Line</string>
+    
+    <string name="take_picture">Fotoğraf Çek</string>
+    <string name="take_picture_description">Bu butonu kullanarak fotoğraf çekebilirsiniz.</string>
+
+</resources>
+
