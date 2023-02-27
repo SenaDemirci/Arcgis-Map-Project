@@ -5,56 +5,6 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/rl_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/tv_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="6dp"
-            android:text="Edit" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_delete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/tv_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="6dp"
-            android:text="Delete" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_add"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/tv_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="6dp"
-            android:text="Add" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/enter_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

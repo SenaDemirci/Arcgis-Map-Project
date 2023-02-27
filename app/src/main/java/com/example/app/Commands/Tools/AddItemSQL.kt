@@ -40,25 +40,12 @@ class AddItemSQL(private var context: Context, private var mapView: MapView): IT
 
         val dialog = BottomSheetDialog(context)
         dialog.setContentView(R.layout.bottomsheetlayout)
-        val btnEdit= dialog.findViewById<RelativeLayout>(R.id.rl_edit)
-        val btnDelete= dialog.findViewById<RelativeLayout>(R.id.rl_delete)
-        val btnAdd= dialog.findViewById<RelativeLayout>(R.id.rl_add)
 
         val btnSave = dialog.findViewById<Button>(R.id.save)
         val btnPrint = dialog.findViewById<Button>(R.id.print)
         val btnCamera = dialog.findViewById<Button>(R.id.camera)
         val editCode = dialog.findViewById<EditText>(R.id.code)
         val editName = dialog.findViewById<EditText>(R.id.name)
-
-        btnEdit?.setOnClickListener {
-            Toast.makeText(context, "Clicked on Edit", Toast.LENGTH_SHORT).show()
-        }
-        btnDelete?.setOnClickListener {
-            Toast.makeText(context, "Clicked on Delete", Toast.LENGTH_SHORT).show()
-        }
-        btnAdd?.setOnClickListener {
-            Toast.makeText(context, "Clicked on Add", Toast.LENGTH_SHORT).show()
-        }
 
         btnSave?.setOnClickListener {
             val codeInfo = editCode?.text.toString()
