@@ -36,7 +36,7 @@ class AddItemSQL(private var context: Context, private var mapView: MapView): IT
     @SuppressLint("Range")
     private fun showDialog(newPoint: Point) {
 
-        val db = DBHelper(context, null)
+        //val db = DBHelper(context, null)
 
         val dialog = BottomSheetDialog(context)
         dialog.setContentView(R.layout.bottomsheetlayout)
