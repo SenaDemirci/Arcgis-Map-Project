@@ -47,7 +47,6 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?): SQLite
 
         // all values are inserted into database
         db.insert(TABLE_NAME, null, values)
-        Log.e("save3", values.toString())
         db.close()
     }
 
@@ -70,11 +69,9 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?): SQLite
         //val values = ContentValues()
         //values.put(PHOTO_COL, getByteArrayFromBitmap(photoBitmap))
         //db.insert(TABLE_NAME, null, values)
-        Log.e("save1", context.toString())
     }
 
     private fun getByteArrayFromBitmap(bitmap: Bitmap): ByteArray {
-        Log.e("save2", bitmap.toString())
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream)
         return stream.toByteArray()
