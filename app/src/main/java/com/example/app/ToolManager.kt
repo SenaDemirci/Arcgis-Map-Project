@@ -16,17 +16,17 @@ class ToolManager(private val context: Context, private val mapView: MapView, pr
     private var lineDrawer: LineDrawer
     private var polygonDrawer: PolygonDrawer
     //private var checkArea: CheckArea
-    private var addItemSQL: AddItemSQL
+    //private var addItemSQL: AddItemSQL
 
     init {
         pointDrawer = PointDrawer(context, mapView)
         lineDrawer = LineDrawer(context, mapView)
         polygonDrawer = PolygonDrawer(context, mapView)
         //checkArea = CheckArea(context, mapView)
-        addItemSQL = AddItemSQL(context, mapView)
+        //addItemSQL = AddItemSQL(context, mapView)
     }
 
-    val commandList = mutableListOf(pointDrawer,lineDrawer,polygonDrawer,addItemSQL)
+    val commandList = mutableListOf(pointDrawer,lineDrawer,polygonDrawer)
 
     fun Initialize(){
         activeTool = null

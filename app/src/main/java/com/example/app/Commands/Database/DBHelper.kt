@@ -18,7 +18,7 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?): SQLite
         val query = ("CREATE TABLE " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY, " +
                 NAME_COl + " TEXT," +
-                AGE_COL + " TEXT" +
+                AGE_COL + " TEXT," +
                 PHOTO_COL + " BLOB" + ")")
 
         // we are calling sqlite method for executing our query
@@ -64,7 +64,9 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?): SQLite
 
     fun savePhotoToDatabase(photoBitmap: Bitmap, context: Context) {
         val db = DBHelper(context, null)
-        addName("null", "null", photoBitmap)
+        addName("", "", photoBitmap)
+
+
         //val values = ContentValues()
         //values.put(PHOTO_COL, getByteArrayFromBitmap(photoBitmap))
         //db.insert(TABLE_NAME, null, values)
@@ -98,6 +100,6 @@ class DBHelper(context: Context, factory: SQLiteDatabase.CursorFactory?): SQLite
         // below is the variable for age column
         val AGE_COL = "age"
 
-        val PHOTO_COL = "photo"
+        val PHOTO_COL = "PHOTO_COL"
     }
 }

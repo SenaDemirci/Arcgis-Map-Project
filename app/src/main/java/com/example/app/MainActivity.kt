@@ -37,7 +37,7 @@ import com.esri.arcgisruntime.mapping.BasemapStyle
 import com.esri.arcgisruntime.mapping.Viewpoint
 import com.esri.arcgisruntime.mapping.view.MapView
 import com.example.app.Commands.Database.DBHelper
-import com.example.app.Commands.Tools.AddItemSQL
+//import com.example.app.Commands.Tools.AddItemSQL
 import com.example.app.databinding.ActivityMainBinding
 import java.io.File
 
@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
 
         setupMap()
 
+/*
         val btnCamera = findViewById<Button>(R.id.btnTakePicture)
         val imageView = findViewById<ImageView>(R.id.imageView)
 
@@ -88,6 +89,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Unable to open camera", Toast.LENGTH_SHORT).show()
             }
         }
+ */
 
     }
 

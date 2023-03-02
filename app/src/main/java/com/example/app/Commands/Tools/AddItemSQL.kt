@@ -13,6 +13,7 @@ import com.example.app.Commands.Database.DBHelper
 import com.example.app.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
+/*
 class AddItemSQL(private var context: Context, private var mapView: MapView): ITool {
     private val graphicsOverlay = GraphicsOverlay()
     override val id = "Add Item"
@@ -50,7 +51,6 @@ class AddItemSQL(private var context: Context, private var mapView: MapView): IT
         btnSave?.setOnClickListener {
             val codeInfo = editCode?.text.toString()
             val nameInfo = editName?.text.toString()
-            //db.addName(codeInfo, nameInfo)
             Toast.makeText(context, codeInfo, Toast.LENGTH_SHORT).show()
             Toast.makeText(context, nameInfo, Toast.LENGTH_SHORT).show()
             editCode?.text?.clear()
@@ -66,8 +66,7 @@ class AddItemSQL(private var context: Context, private var mapView: MapView): IT
             editCode?.append(cursor.getString(cursor.getColumnIndex(DBHelper.NAME_COl)) + "\n")
             editName?.append(cursor.getString(cursor.getColumnIndex(DBHelper.AGE_COL)) + "\n")
 
-            // moving our cursor to next
-            // position and appending values
+            // moving our cursor to next position and appending values
             while(cursor.moveToNext()){
                 editCode?.append(cursor.getString(cursor.getColumnIndex(DBHelper.NAME_COl)) + "\n")
                 editName?.append(cursor.getString(cursor.getColumnIndex(DBHelper.AGE_COL)) + "\n")
@@ -95,3 +94,4 @@ class AddItemSQL(private var context: Context, private var mapView: MapView): IT
     }
 
 }
+*/
