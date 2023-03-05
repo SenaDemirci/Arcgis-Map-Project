@@ -34,27 +34,81 @@
             android:layout_gravity="center_horizontal"
             android:text="SAVE"/>
 
+        <EditText
+            android:id="@+id/ask_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/save"
+            android:hint="Enter code info"
+            android:inputType="text" />
+
         <Button
             android:id="@+id/print"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/save"
+            android:layout_below="@+id/ask_button"
             android:layout_gravity="center_horizontal"
-            android:text="SHOW"/>
+            android:text="READ DB"/>
+
+        <Button
+            android:id="@+id/update_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/print"
+            android:layout_gravity="center_horizontal"
+            android:text="UPDATE DB"/>
+
+        <Button
+            android:id="@+id/delete_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/update_btn"
+            android:layout_gravity="center_horizontal"
+            android:text="DELETE DB"/>
 
         <Button
             android:id="@+id/camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/print"
+            android:layout_below="@+id/delete_btn"
             android:layout_gravity="center_horizontal"
             android:text="CAMERA"/>
+
+        <EditText
+            android:id="@+id/idText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/camera"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="serif"
+            android:textColor="@color/black"
+            android:textSize="26dp"/>
+
+        <EditText
+            android:id="@+id/codeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_below="@+id/idText"
+            android:fontFamily="serif"
+            android:textColor="@color/black"
+            android:textSize="26dp"/>
+
+        <EditText
+            android:id="@+id/nameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/codeText"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="serif"
+            android:textColor="@color/black"
+            android:textSize="26dp"/>
 
         <ImageView
             android:id="@+id/show_picture"
             android:layout_width="153dp"
             android:layout_height="126dp"
-            android:layout_below="@+id/camera"
+            android:layout_below="@+id/nameText"
             android:layout_marginEnd="-250dp" />
     </RelativeLayout>
 

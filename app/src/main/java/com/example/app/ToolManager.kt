@@ -15,6 +15,7 @@ class ToolManager(private val context: Context, private val mapView: MapView, pr
     private var pointDrawer: PointDrawer
     private var lineDrawer: LineDrawer
     private var polygonDrawer: PolygonDrawer
+    private var addItemBSL: AddItemBSL
     //private var checkArea: CheckArea
     //private var addItemSQL: AddItemSQL
 
@@ -22,11 +23,12 @@ class ToolManager(private val context: Context, private val mapView: MapView, pr
         pointDrawer = PointDrawer(context, mapView)
         lineDrawer = LineDrawer(context, mapView)
         polygonDrawer = PolygonDrawer(context, mapView)
+        addItemBSL = AddItemBSL(context, mapView)
         //checkArea = CheckArea(context, mapView)
         //addItemSQL = AddItemSQL(context, mapView)
     }
 
-    val commandList = mutableListOf(pointDrawer,lineDrawer,polygonDrawer)
+    val commandList = mutableListOf(pointDrawer,lineDrawer,polygonDrawer,addItemBSL)
 
     fun Initialize(){
         activeTool = null
